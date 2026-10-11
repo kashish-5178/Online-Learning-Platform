@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - LearnHub</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: whitesmoke;
+        }
+
+        .register-box {
+            width: 350px;
+            margin: 80px auto;
+            padding: 35px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px lightgray;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+        }
+
+        .register-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register-box">
+
+        <h1>Create Account</h1>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Username</label>
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter username"
+                required
+            >
+
+            <label>Email</label>
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter email"
+                required
+            >
+
+            <label>Password</label>
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+            <button type="submit" class="register-btn">
+                Create Account
+            </button>
+        </form>
+
+        <a href="/login/" class="back">
+            Already have an account? Login
+        </a>
+
+    </div>
+
+</body>
+</html>

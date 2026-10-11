@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LearnHub - Online Learning Platform</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: whitesmoke;
+            color: black;
+        }
+
+        nav {
+            background-color: black;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: yellow;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background-color: lightblue;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+        }
+
+        .courses {
+            padding: 40px;
+        }
+
+        .courses h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .course-container {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .course-card {
+            background-color: white;
+            padding: 25px;
+            width: 280px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px lightgray;
+        }
+
+        .course-card h3 {
+            margin-top: 0;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 18px;
+            color: green;
+        }
+
+        .details-btn {
+            display: inline-block;
+            background-color: green;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .enroll-btn {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .enroll-btn:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2>LearnHub</h2>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/admin/">Admin</a>
+
+            {% if user.is_authenticated %}
+
+                <a href="/dashboard/">Dashboard</a>
+                <a href="/logout/">Logout</a>
+
+            {% else %}
+
+                <a href="/login/">Login</a>
+                <a href="/register/">Register</a>
+
+            {% endif %}
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Learn. Grow. Succeed.</h1>
+        <p>Learn new skills with our online courses.</p>
+    </section>
+
+    <section class="courses">
+        <h2>Available Courses</h2>
+
+        <div class="course-container">
+
+            {% for course in courses %}
+
+                <div class="course-card">
+
+                    <h3>{{ course.title }}</h3>
+
+                    <p>{{ course.description }}</p>
+
+                    <p class="price">
+                        Rs. {{ course.price }}
+                    </p>
+
+                    <a href="/course/{{ course.id }}/"
+                       class="details-btn">
+                        View Details
+                    </a>
+
+                    <a href="/enroll/"
+                       class="enroll-btn">
+                        Enroll Now
+                    </a>
+
+                </div>
+
+            {% empty %}
+
+                <p>No courses available.</p>
+
+            {% endfor %}
+
+        </div>
+    </section>
+
+</body>
+</html>

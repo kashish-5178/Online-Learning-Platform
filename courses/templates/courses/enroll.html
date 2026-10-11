@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enroll - LearnHub</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: whitesmoke;
+        }
+
+        .enroll-box {
+            width: 400px;
+            margin: 60px auto;
+            padding: 35px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px lightgray;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+        }
+
+        .enroll-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .message {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="enroll-box">
+
+        <h1>Enroll in Course</h1>
+
+        {% if message %}
+            <p class="message">{{ message }}</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Student Name</label>
+            <input
+                type="text"
+                name="student_name"
+                value="{{ request.user.username }}"
+                readonly
+            >
+
+            <label>Email</label>
+            <input
+                type="email"
+                name="email"
+                value="{{ request.user.email }}"
+                readonly
+            >
+
+            <label>Course</label>
+            <select name="course" required>
+                <option value="">Select a course</option>
+                <option value="Python for Beginners">
+                    Python for Beginners
+                </option>
+                <option value="Web Development">
+                    Web Development
+                </option>
+            </select>
+
+            <button type="submit" class="enroll-btn">
+                Enroll Now
+            </button>
+        </form>
+
+        <a href="/dashboard/" class="back">
+            Go to Dashboard
+        </a>
+
+    </div>
+
+</body>
+</html>

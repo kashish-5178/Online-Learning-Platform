@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard - LearnHub</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: whitesmoke;
+        }
+
+        .header {
+            background-color: lightblue;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: black;
+        }
+
+        .container {
+            width: 85%;
+            margin: 40px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .course-card {
+            background-color: whitesmoke;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            border-left: 5px solid blue;
+        }
+
+        .course-card h3 {
+            color: black;
+        }
+
+        .course-card p {
+            color: gray;
+        }
+
+        .browse-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: blue;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .message {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Welcome {{ request.user.username }}!</h1>
+        <p>This is your student dashboard.</p>
+    </div>
+
+    <div class="container">
+
+        <h2>My Courses</h2>
+
+        {% if enrollments %}
+
+            {% for enrollment in enrollments %}
+
+                <div class="course-card">
+                    <h3>{{ enrollment.course }}</h3>
+                    <p>Student: {{ enrollment.student_name }}</p>
+                    <p>Email: {{ enrollment.email }}</p>
+                    <p class="message">Enrolled Successfully</p>
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>You have not enrolled in any courses yet.</p>
+
+            <a href="/" class="browse-btn">
+                Browse Courses
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
